@@ -8,6 +8,7 @@ namespace ScreenCapture
 	{
 		public Rectangle CapturedRect { get; set; }
 		public Bitmap CapturedBmp { get; private set; }
+		public int DPI { get; set; }
 		public bool IsValid => CapturedRect.Width > 0 && CapturedRect.Height > 0;
 
 		private Point m_startPoint;
@@ -32,6 +33,11 @@ namespace ScreenCapture
 
 			Visible = false; // 截屏开始，先隐藏自身
 			m_screenBmp = new Bitmap(rect.Width, rect.Height);
+			if (DPI > 0)
+			{
+				m_screenBmp.SetResolution(DPI, DPI);
+			}
+
 			using (Graphics g = Graphics.FromImage(m_screenBmp))
 			{
 				g.CopyFromScreen(0, 0, 0, 0, rect.Size);
@@ -123,6 +129,10 @@ namespace ScreenCapture
 			if (IsValid)
 			{
 				CapturedBmp = new Bitmap(CapturedRect.Width, CapturedRect.Height);
+				if (DPI > 0)
+				{
+					CapturedBmp.SetResolution(DPI, DPI);
+				}
 				using (Graphics g = Graphics.FromImage(CapturedBmp))
 				{
 					g.DrawImage(m_screenBmp, new Rectangle(0, 0, CapturedRect.Width, CapturedRect.Height), CapturedRect, GraphicsUnit.Pixel);

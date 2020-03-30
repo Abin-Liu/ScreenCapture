@@ -22,15 +22,20 @@ namespace Demo
 			form.ShowDialog(this);
 		}
 
-		private void pictureBox1_Click(object sender, EventArgs e)
+		private void CaptureFormScreen()
 		{
 			ScreenCapture.MainForm form = new ScreenCapture.MainForm();
 			if (form.ShowDialog(this) == DialogResult.OK)
 			{
 				pictureBox1.Image = form.CapturedBmp;
-				label1.Text = "Region: " + form.CapturedRect.ToString();
+				label1.Text = form.CapturedRect.ToString();
 			}
 		}
+
+		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			CaptureFormScreen();
+		}		
 
 		private void button1_Click_1(object sender, EventArgs e)
 		{
