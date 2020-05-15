@@ -52,6 +52,11 @@ namespace ScreenCapture
 				return null;
 			}
 
+			if (!form.IsValid)
+			{
+				return null;
+			}
+
 			return new CaptureResult()
 			{
 				Rect = form.CapturedRect,

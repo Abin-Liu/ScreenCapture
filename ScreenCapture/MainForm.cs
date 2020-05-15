@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace ScreenCapture
 {
-	public partial class MainForm : Form
+	partial class MainForm : Form
 	{
 		public Rectangle CapturedRect { get; set; }
 		public Bitmap CapturedBmp { get; private set; }
